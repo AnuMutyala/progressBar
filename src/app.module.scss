@@ -1,0 +1,27 @@
+.progress-bar-cont {
+  .webcam-container{
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .progress-bar-bar {
+    height: 38px;
+    margin-top: 15px;
+  }
+
+  .dropdown-bar{
+    margin: 20px 30px 0 0;
+  }
+
+  .button-style {
+    margin: 0 30px 0 0;
+  }
+
+  .btn-row {
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  } 
+
+}

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
-import styles from './index.module.scss';
-import { ProgressBar,Button , Dropdown} from "react-bootstrap";
+import styles from './app.module.scss';
+import { ProgressBar } from "react-bootstrap";
 
 
 class App extends Component {
@@ -32,8 +31,6 @@ class App extends Component {
     let b = parseInt(this.state.bars[this.state.selectValue-1]) + parseInt(e.target.value);
     let barColor1 = "info";
     if(b>0 && b<=this.state.limit){
-      b = b;
-      
     }
     else if(b > this.state.limit){
       b = this.state.limit;
@@ -58,9 +55,6 @@ class App extends Component {
           .then((responseJson) => {
             this.setState({ buttons : responseJson.buttons, bars : responseJson.bars , limit: responseJson.limit })
           })
-          // .then((responseJson) => {
-          //   this.setState({ buttons : responseJson.buttons, bars : responseJson.bars , limit: responseJson.limit })
-          // })
           .catch((error) => {
             console.error(error);
           });
@@ -84,29 +78,19 @@ class App extends Component {
 
   return (
     <div className={styles['progress-bar-cont']}>
-  <div className={styles['webcam-container']}> Progess Bars 
-  {/* style = {{height: '25px',marginTop: '15px'}} */}
-      {bars.map(s => (<ProgressBar className={styles['progress-bar-bar']}  variant={barColor[bars.indexOf(s)]} now={s} max= {limit}  min={0} label={`${s}%`} />))} 
-      {/* style = {{margin: '20px 30px 0 0'}} */}
-      
-      <div className={styles['btn-row']}>
-      <div className={styles['buttonContainer']}>
+      <div className={styles['webcam-container']}> 
+          <h1>Progess Bars </h1>
+          {bars.map(s => (<ProgressBar className={styles['progress-bar-bar']}  variant={barColor[bars.indexOf(s)]} now={s} max= {limit}  min={0} label={`${s}%`} />))} 
+          
+          <div className={styles['btn-row']}>
+              <select className={styles['dropdown-bar']}  id="dropdown" onChange={this.handleDropdownChange}>
+                {bars.map(s => (<option value={bars.indexOf(s)+1}  >{`bar${bars.indexOf(s)+1}`}</option>))} 
+              </select>
 
-      {/* <div class="selectdiv"> */}
-      <select className={styles['dropdown-bar']}  id="dropdown" onChange={this.handleDropdownChange}>
-        {bars.map(s => (<option value={bars.indexOf(s)+1}  >{`bar${bars.indexOf(s)+1}`}</option>))} 
-      </select>
-      {/* </div> */}
-
-      {buttons.map(b => (
-        <button style = {{margin: '0 20px 0 0'}} type="button" class="btn btn-success" value={b} onClick={(e) => this.addToBar(e, "value")}
-        // style="margin-left: 20px" 
-        > {b}</button>
-      ))}  
+              {buttons.map(b => (<button style = {{margin: '0 20px 0 0'}} type="button" class="btn btn-success" value={b} onClick={(e) => this.addToBar(e, "value")}> {b}</button>))}  
+          </div>   
       </div>
-      </div>   
-</div>
-</div>
+    </div>
   );
   }
 }
